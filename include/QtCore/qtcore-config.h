@@ -27,6 +27,7 @@
 #define QT_FEATURE_settings 1
 #define QT_FEATURE_sharedmemory 1
 #define QT_FEATURE_sortfilterproxymodel 1
+#define QT_FEATURE_std_atomic64 1
 #define QT_FEATURE_stringlistmodel 1
 #define QT_FEATURE_systemsemaphore 1
 #define QT_FEATURE_temporaryfile 1

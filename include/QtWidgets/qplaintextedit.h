@@ -50,10 +50,9 @@
 #include <QtGui/qtextformat.h>
 #include <QtGui/qabstracttextdocumentlayout.h>
 
-#ifndef QT_NO_TEXTEDIT
+QT_REQUIRE_CONFIG(textedit);
 
 QT_BEGIN_NAMESPACE
-
 
 class QStyleSheet;
 class QTextDocument;
@@ -250,7 +249,7 @@ protected:
     virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent *e) Q_DECL_OVERRIDE;
-#ifndef QT_NO_WHEELEVENT
+#if QT_CONFIG(wheelevent)
     virtual void wheelEvent(QWheelEvent *e) Q_DECL_OVERRIDE;
 #endif
 
@@ -328,8 +327,5 @@ private:
 };
 
 QT_END_NAMESPACE
-
-
-#endif // QT_NO_TEXTEDIT
 
 #endif // QPLAINTEXTEDIT_H

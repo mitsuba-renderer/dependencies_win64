@@ -1172,7 +1172,8 @@
 #  define Q_DECL_ALIGN(n)   alignas(n)
 #endif
 
-#if QT_HAS_CPP_ATTRIBUTE(nodiscard)         // P0188R1
+#if QT_HAS_CPP_ATTRIBUTE(nodiscard) && !defined(Q_CC_CLANG)         // P0188R1
+// Can't use [[nodiscard]] with Clang, see https://bugs.llvm.org/show_bug.cgi?id=33518
 #  undef Q_REQUIRED_RESULT
 #  define Q_REQUIRED_RESULT [[nodiscard]]
 #endif
@@ -1336,22 +1337,22 @@
     do {\
         Q_ASSERT_X(false, "Q_UNREACHABLE()", "Q_UNREACHABLE was reached");\
         Q_UNREACHABLE_IMPL();\
-    } while (0)
+    } while (false)
 
 #define Q_ASSUME(Expr) \
     do {\
         const bool valueOfExpression = Expr;\
         Q_ASSERT_X(valueOfExpression, "Q_ASSUME()", "Assumption in Q_ASSUME(\"" #Expr "\") was not correct");\
         Q_ASSUME_IMPL(valueOfExpression);\
-    } while (0)
+    } while (false)
 
 #if defined(__cplusplus)
-#if QT_HAS_CPP_ATTRIBUTE(fallthrough)
-#  define Q_FALLTHROUGH() [[fallthrough]]
-#elif QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
+#if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
 #    define Q_FALLTHROUGH() [[clang::fallthrough]]
 #elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
 #    define Q_FALLTHROUGH() [[gnu::fallthrough]]
+#elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
+#  define Q_FALLTHROUGH() [[fallthrough]]
 #endif
 #endif
 #ifndef Q_FALLTHROUGH

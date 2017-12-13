@@ -20,11 +20,10 @@
 #define QT_COMPILER_SUPPORTS_F16C 1
 #define QT_FEATURE_force_asserts -1
 #define QT_LARGEFILE_SUPPORT 64
-#define QT_NO_MREMAP 
 #define QT_FEATURE_separate_debug_info -1
 #define QT_FEATURE_simulator_and_device -1
 #define QT_FEATURE_static -1
-#define QT_VERSION_STR "5.9.1"
+#define QT_VERSION_STR "5.9.3"
 #define QT_VERSION_MAJOR 5
 #define QT_VERSION_MINOR 9
-#define QT_VERSION_PATCH 1
+#define QT_VERSION_PATCH 3

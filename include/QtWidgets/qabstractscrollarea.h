@@ -46,7 +46,7 @@
 QT_BEGIN_NAMESPACE
 
 
-#ifndef QT_NO_SCROLLAREA
+#if QT_CONFIG(scrollarea)
 
 class QMargins;
 class QScrollBar;
@@ -116,7 +116,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *) Q_DECL_OVERRIDE;
     void mouseDoubleClickEvent(QMouseEvent *) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *) Q_DECL_OVERRIDE;
-#ifndef QT_NO_WHEELEVENT
+#if QT_CONFIG(wheelevent)
     void wheelEvent(QWheelEvent *) Q_DECL_OVERRIDE;
 #endif
 #ifndef QT_NO_CONTEXTMENU
@@ -146,7 +146,7 @@ private:
     friend class QWidgetPrivate;
 };
 
-#endif // QT_NO_SCROLLAREA
+#endif // QT_CONFIG(scrollarea)
 
 QT_END_NAMESPACE
 

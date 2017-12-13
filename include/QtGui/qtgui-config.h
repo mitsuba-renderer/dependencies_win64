@@ -41,4 +41,5 @@
 #define QT_FEATURE_texthtmlparser 1
 #define QT_FEATURE_textodfwriter 1
 #define QT_FEATURE_validator 1
+#define QT_FEATURE_whatsthis 1
 #define QT_FEATURE_wheelevent 1

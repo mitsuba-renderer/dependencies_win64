@@ -120,7 +120,7 @@ public:
     void setPriority(Priority priority);
     Priority priority() const;
 
-#ifndef QT_NO_MENU
+#if QT_CONFIG(menu)
     QMenu *menu() const;
     void setMenu(QMenu *menu);
 #endif
@@ -172,7 +172,7 @@ public:
     QWidget *parentWidget() const;
 
     QList<QWidget *> associatedWidgets() const;
-#ifndef QT_NO_GRAPHICSVIEW
+#if QT_CONFIG(graphicsview)
     QList<QGraphicsWidget *> associatedGraphicsWidgets() const; // ### suboptimal
 #endif
 

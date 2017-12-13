@@ -45,10 +45,9 @@
 #include <QtCore/qvariant.h>
 #include <QtWidgets/qabstractspinbox.h>
 
+QT_REQUIRE_CONFIG(datetimeedit);
+
 QT_BEGIN_NAMESPACE
-
-
-#ifndef QT_NO_DATETIMEEDIT
 
 class QDateTimeEditPrivate;
 class QStyleOptionSpinBox;
@@ -177,7 +176,7 @@ public Q_SLOTS:
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
-#ifndef QT_NO_WHEELEVENT
+#if QT_CONFIG(wheelevent)
     void wheelEvent(QWheelEvent *event) override;
 #endif
     void focusInEvent(QFocusEvent *event) override;
@@ -227,8 +226,6 @@ Q_SIGNALS:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(QDateTimeEdit::Sections)
-
-#endif // QT_NO_DATETIMEEDIT
 
 QT_END_NAMESPACE
 

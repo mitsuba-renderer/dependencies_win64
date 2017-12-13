@@ -75,5 +75,4 @@
 #define QT_FEATURE_undostack 1
 #define QT_FEATURE_undogroup 1
 #define QT_FEATURE_undoview 1
-#define QT_FEATURE_whatsthis 1
 #define QT_FEATURE_wizard 1

@@ -50,10 +50,9 @@
 Q_FORWARD_DECLARE_OBJC_CLASS(NSMenu);
 #endif
 
+QT_REQUIRE_CONFIG(menu);
+
 QT_BEGIN_NAMESPACE
-
-
-#ifndef QT_NO_MENU
 
 class QMenuPrivate;
 class QStyleOptionMenuItem;
@@ -237,7 +236,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *) Q_DECL_OVERRIDE;
-#ifndef QT_NO_WHEELEVENT
+#if QT_CONFIG(wheelevent)
     void wheelEvent(QWheelEvent *) Q_DECL_OVERRIDE;
 #endif
     void enterEvent(QEvent *) Q_DECL_OVERRIDE;
@@ -279,8 +278,6 @@ private:
 // ### Qt 4 compatibility; remove in Qt 6
 inline QT_DEPRECATED void qt_mac_set_dock_menu(QMenu *menu) { menu->setAsDockMenu(); }
 #endif
-
-#endif // QT_NO_MENU
 
 QT_END_NAMESPACE
 

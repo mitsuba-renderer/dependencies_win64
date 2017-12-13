@@ -43,9 +43,9 @@
 #include <QtWidgets/qtwidgetsglobal.h>
 #include <QtWidgets/qwidget.h>
 
-#if QT_CONFIG(scrollbar)
-
 #include <QtWidgets/qabstractslider.h>
+
+QT_REQUIRE_CONFIG(scrollbar);
 
 QT_BEGIN_NAMESPACE
 
@@ -64,7 +64,7 @@ public:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
 
 protected:
-#ifndef QT_NO_WHEELEVENT
+#if QT_CONFIG(wheelevent)
     void wheelEvent(QWheelEvent *) Q_DECL_OVERRIDE;
 #endif
     void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
@@ -85,7 +85,7 @@ private:
 
     Q_DISABLE_COPY(QScrollBar)
     Q_DECLARE_PRIVATE(QScrollBar)
-#ifndef QT_NO_ITEMVIEWS
+#if QT_CONFIG(itemviews)
     friend class QTableView;
     friend class QTreeViewPrivate;
     friend class QCommonListViewBase;
@@ -95,7 +95,5 @@ private:
 };
 
 QT_END_NAMESPACE
-
-#endif // QT_CONFIG(scrollbar)
 
 #endif // QSCROLLBAR_H

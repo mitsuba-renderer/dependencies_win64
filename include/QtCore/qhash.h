@@ -373,7 +373,7 @@ public:
         typedef const T *pointer;
         typedef const T &reference;
 
-        inline const_iterator() : i(Q_NULLPTR) { }
+        Q_DECL_CONSTEXPR inline const_iterator() : i(Q_NULLPTR) { }
         explicit inline const_iterator(void *node)
             : i(reinterpret_cast<QHashData::Node *>(node)) { }
 #ifdef QT_STRICT_ITERATORS
@@ -387,8 +387,8 @@ public:
         inline const T &value() const { return concrete(i)->value; }
         inline const T &operator*() const { return concrete(i)->value; }
         inline const T *operator->() const { return &concrete(i)->value; }
-        inline bool operator==(const const_iterator &o) const { return i == o.i; }
-        inline bool operator!=(const const_iterator &o) const { return i != o.i; }
+        Q_DECL_CONSTEXPR inline bool operator==(const const_iterator &o) const { return i == o.i; }
+        Q_DECL_CONSTEXPR inline bool operator!=(const const_iterator &o) const { return i != o.i; }
 
         inline const_iterator &operator++() {
             i = QHashData::nextNode(i);
@@ -950,8 +950,22 @@ Q_OUTOFLINE_TEMPLATE bool QHash<Key, T>::operator==(const QHash &other) const
             return false;
 
         // Keys in the ranges are equal by construction; this checks only the values.
-        if (!std::is_permutation(it, thisEqualRangeEnd, otherEqualRange.first))
+        //
+        // When using the 3-arg std::is_permutation, MSVC will emit warning C4996,
+        // passing an unchecked iterator to a Standard Library algorithm. We don't
+        // want to suppress the warning, and we can't use stdext::make_checked_array_iterator
+        // because QHash::(const_)iterator does not work with size_t and thus will
+        // emit more warnings. Use the 4-arg std::is_permutation instead (which
+        // is supported since MSVC 2015).
+        //
+        // ### Qt 6: if C++14 library support is a mandated minimum, remove the ifdef for MSVC.
+        if (!std::is_permutation(it, thisEqualRangeEnd, otherEqualRange.first
+#if defined(Q_CC_MSVC) && _MSC_VER >= 1900
+                                 , otherEqualRange.second
+#endif
+                                 )) {
             return false;
+        }
 
         it = thisEqualRangeEnd;
     }

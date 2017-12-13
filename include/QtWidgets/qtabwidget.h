@@ -44,10 +44,9 @@
 #include <QtWidgets/qwidget.h>
 #include <QtGui/qicon.h>
 
+QT_REQUIRE_CONFIG(tabwidget);
+
 QT_BEGIN_NAMESPACE
-
-
-#ifndef QT_NO_TABWIDGET
 
 class QTabBar;
 class QTabWidgetPrivate;
@@ -94,7 +93,7 @@ public:
     QString tabToolTip(int index) const;
 #endif
 
-#ifndef QT_NO_WHATSTHIS
+#if QT_CONFIG(whatsthis)
     void setTabWhatsThis(int index, const QString &text);
     QString tabWhatsThis(int index) const;
 #endif
@@ -180,8 +179,6 @@ private:
     Q_PRIVATE_SLOT(d_func(), void _q_tabMoved(int, int))
     void setUpLayout(bool = false);
 };
-
-#endif // QT_NO_TABWIDGET
 
 QT_END_NAMESPACE
 

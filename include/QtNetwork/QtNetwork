@@ -10,15 +10,21 @@
 #include "qhostinfo.h"
 #include "qhstspolicy.h"
 #include "qhttpmultipart.h"
+#if QT_CONFIG(localserver)
 #include "qlocalserver.h"
+#endif
+#if QT_CONFIG(localserver)
 #include "qlocalsocket.h"
+#endif
 #include "qnetworkaccessmanager.h"
 #include "qnetworkconfigmanager.h"
 #include "qnetworkconfiguration.h"
 #include "qnetworkcookie.h"
 #include "qnetworkcookiejar.h"
 #include "qnetworkdatagram.h"
+#if QT_CONFIG(networkdiskcache)
 #include "qnetworkdiskcache.h"
+#endif
 #include "qnetworkinterface.h"
 #include "qnetworkproxy.h"
 #include "qnetworkreply.h"
